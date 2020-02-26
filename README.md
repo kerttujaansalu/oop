@@ -1,1 +1,1 @@
-# oop
+# Objektorienteeritud programmeerimine
