@@ -5,7 +5,6 @@ let synnikuupaev;
 function taisNimi(eesnimi, perenimi){
     return `${eesnimi} ${perenimi}`;
   }
-
   function arvutaVanus(synnikuupaev){
     synnikuupaev = new Date(synnikuupaev);
     vaheSekundites = Date.now() - synnikuupaev.getTime();
@@ -14,6 +13,5 @@ function taisNimi(eesnimi, perenimi){
     vanus = aastaDate - 1970;
     return `Vanus: ${vanus} aastat`;
   }
-
   console.log(taisNimi("Kerttu", "Jaansalu"));
   console.log(arvutaVanus("1999-02-18")); 
