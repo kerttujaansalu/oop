@@ -1,32 +1,32 @@
 // inimese kirjeldus OOP abil
-// Objekt.prototype
-// inimese konstruktor
+// Prototüüpide pärilus
+// isiku konstruktor
+function Isik(e, p){
 
-function Isik(n, skp){ //konstruktor 
-    this.nimi = n;
-    this.synnikuupaev = new Date(skp);
+    this.eesnimi = e;
+    this.perenimi = p;
 
 }
 // väljasta täisnimi
 Isik.prototype.taisNimi = function(){
-  return `${this.eesnimi} ${this.perenimi}`;
-}
-// arvuta vanus
-Isik.prototype.arvutaVanus = function(){
-  const vaheSekundites = Date.now() - this.synnikuupaev.getTime();
-  const vanusDateKujul = new Date(vaheSekundites);
-  const taisAasta = vanusDateKujul.getUTCFullYear();
-  const vanus = taisAasta - 1970;
-  return vanus;
+    return `${this.eesnimi} ${this.perenimi}`;
+  }
+// klient konstruktor
+function Klient(e, p, t, s){
+    // konstruktori kasutamine
+    Isik.call(this, e, p); 
+    this.telefon = t;
+    this.staatus = s;
   }
 
-  // abiellumine
-Isik.prototype.abiellus = function(uusPereNimi){
-    this.perenimi = uusPereNimi;
+  // teiste meetodite/funktsioonide kasutamine
+Klient.prototype = Object.create(Isik.prototype);
+Klient.prototype.constructor = Klient;
+
+// määrame täisnimi funktsiooni Klient objektile
+Klient.prototype.taisNimi = function(){
+  return `${this.eesnimi} ${this.perenimi} - sinul on ${this.staatus} tase`;
   }
 
-  const kerttu = new Isik('Kerttu', 'Jaansalu', '02-18-1999');
-  const rudolf = new Isik('Rudolf', 'Saluoks', '05-23-1999');
-  console.log(kerttu);
-  kerttu.abiellus('Saluoks');
+  const rudolf = new Klient('Rudolf', 'Saluoks', '2222 6666', 'hõbe');
   console.log(rudolf.taisNimi()); 
