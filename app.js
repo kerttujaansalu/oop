@@ -15,5 +15,5 @@ function taisNimi(eesnimi, perenimi){
     return `Vanus: ${vanus} aastat`;
   }
 
-  console.log(taisNimi("Minu", "Laps"));
-  console.log(arvutaVanus("2014-08-01")); 
+  console.log(taisNimi("Kerttu", "Jaansalu"));
+  console.log(arvutaVanus("1999-02-18")); 
