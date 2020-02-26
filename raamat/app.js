@@ -11,7 +11,13 @@ function KL() {
 
 }
 
-// KL funktsionaal
+// LocalStorage - LS
+// konstruktor
+function LS() {
+
+}
+
+// KL funktsioon
 // sisendväljade puhastamine
 KL.prototype.puhastaSisend = function(){
   document.getElementById('title').value = '';
@@ -66,8 +72,9 @@ KL.prototype.kustutaRaamatTabelist = function(kustutaElement){
    }, 5000);
 }
 
+// LS funktsioon
 // raamatute lugemine LS-st
-KL.prototype.loeRaamatud = function(){
+LS.prototype.loeRaamatud = function(){
     // loome raamatute hoidla LS-s
     let raamatud;
     // kui raamatud veel LS-s ei eksisteeri
@@ -81,7 +88,7 @@ KL.prototype.loeRaamatud = function(){
 }
 
 // raamatu salvestamine LS-sse
-KL.prototype.salvestaRaamat = function(r){
+LS.prototype.salvestaRaamat = function(r){
   // tekitame raamatute massiiv
   const raamatud = this.loeRaamatud();
   // lükame uue raamatud andmed massiivi
@@ -91,10 +98,15 @@ KL.prototype.salvestaRaamat = function(r){
     localStorage.setItem('raamatud', JSON.stringify(raamatud));
 }
 
+// KL funktsionaal
+
 // salvestatud raamatute näitamine
 KL.prototype.naitaRaamatud = function(){
+    // loome LS objekt funktsionaali kutsumiseks
+  const ls = new LS();
+
   // vaatame, millised raamatud on olemas
-  const raamatud = this.loeRaamatud();
+  const raamatud = ls.loeRaamatud();
   raamatud.forEach(function(raamat){
     // loeme andmed LS-st ühekaupa
     // ja teisendame Raamat objektiks
@@ -106,7 +118,8 @@ KL.prototype.naitaRaamatud = function(){
   });
 }
 
-KL.prototype.kustutaRaamatLS = function(isbn){
+// LS funktsionaal
+LS.prototype.kustutaRaamatLS = function(isbn){
     // vaatame, millised raamatud on olemas
     const raamatud = this.loeRaamatud();
     raamatud.forEach(function(raamat, index){
@@ -157,8 +170,11 @@ function lisaRaamat(e){
     // lisame sisestatud raamat tabelisse
     console.log(raamat);
     kl.lisaRaamatTabelisse(raamat);
+    // loome LS objekt funktsionaali kutsumiseks
+    const ls = new LS();
     // salvestame raamatu andmed LS-sse
-    kl.salvestaRaamat(raamat);
+    ls.salvestaRaamat(raamat);
+    // anname teate lisamisest
     kl.teade('Raamat on lisatud!', 'valid');
   }
 
@@ -183,8 +199,12 @@ function kustutaRaamat(e){
   isbn = X.parentElement.previousElementSibling.textContent;
   // kustutame andmed tabeli väljundist
   kl.kustutaRaamatTabelist(X);
+
+  // loome LS objekt funktsionaali kutsumiseks
+  const ls = new LS();
+
   // kustutame andmed LS-st
-  onKustutatud = kl.kustutaRaamatLS(isbn);
+  onKustutatud = ls.kustutaRaamatLS(isbn);
 
   // väljastame vastav teade
   if(onKustutatud){
