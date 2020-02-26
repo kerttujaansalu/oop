@@ -65,8 +65,8 @@ KL.prototype.kustutaRaamatTabelist = function(kustutaElement){
    }, 5000);
 }
 
-// raamatu salvestamine LS-sse
-KL.prototype.salvestaRaamat = function(r){
+// raamatute lugemine LS-st
+KL.prototype.loeRaamatud = function(){
     // loome raamatute hoidla LS-s
     let raamatud;
     // kui raamatud veel LS-s ei eksisteeri
@@ -76,7 +76,17 @@ KL.prototype.salvestaRaamat = function(r){
       // kui aga raamatud juba olemas, saame need kätte
       raamatud = JSON.parse(localStorage.getItem('raamatud'));
     }
+    return raamatud;
+}
+
+// raamatu salvestamine LS-sse
+KL.prototype.salvestaRaamat = function(r){
+  // tekitame raamatute massiiv
+  raamatud = this.loeRaamatud();
+  // lükame uue raamatud andmed massiivi
+
     raamatud.push(r);
+    // lisame andmed LS-sse
     localStorage.setItem('raamatud', JSON.stringify(raamatud));
     console.log(raamatud);
   }
