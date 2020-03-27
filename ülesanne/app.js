@@ -4,15 +4,20 @@ const clearTask = document.querySelector('#clear-tasks');
 const filter = document.querySelector('#filter');
 
 document.addEventListener('DOMContentLoaded', ylesanneteTabel);
+
+//funktsioon tabeli tekitamiseks, kasutatakse app.js ja KL.js
 function ylesanneteTabel(e){
-    
+
+
     const kl = new KL();
+
     kl.naitaYlesannet();
     e.preventDefault();
 }
 
 document.getElementById('task-form').addEventListener('submit', lisaYlesanne);
-   
+
+// funktsioon ülesannete listi lisamiseks, app.js, KL.js, LS.js
 function lisaYlesanne(e){
     const taskInput = document.getElementById('task').value;
 
@@ -32,6 +37,8 @@ function lisaYlesanne(e){
 }
 
 document.querySelector('.collection').addEventListener('click', eemaldaYlesanne);
+
+// kustutab üksikult ülesanded listist (kollase ristiga) ja local storagest, app.js, KL.js, LS.js
 function eemaldaYlesanne(e){
     const kl = new KL();
     const ls = new LS();
@@ -42,6 +49,8 @@ function eemaldaYlesanne(e){
 }
 
 document.getElementById('clear-tasks').addEventListener('click', kustutaYl);
+
+// kustutab kõik ülesanded listist korraga (hall nupp), app.js, KL.js
 function kustutaYl(e){
 
     const kl = new KL();

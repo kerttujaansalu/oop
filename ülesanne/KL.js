@@ -1,9 +1,11 @@
 class KL {
+
+    // funktsioon välja puhastamiseks (kui oled vajutanud Lisa ülesanne), app.js ja KL.js
     puhastaSisend(){
         document.getElementById('task').value = '';
     }
 
-    
+    // funktsioon ülesande tekitamiseks tabelisse
     lisaYlesanneTabelisse (y){
 
        const li = document.createElement('li');
@@ -16,19 +18,20 @@ class KL {
        taskList.appendChild(li);
 
     }
-        
-        kustutaYlesanneTabelist(kustutaElement){
-            if(confirm('Kas soovid kustutada ülesannet?')){
-                kustutaElement.parentElement.parentElement.remove();
-            }
+    // kustutab ühe ülesande listist, app.js ja KL.js
+    kustutaYlesanneTabelist(kustutaElement){
+        if(confirm('Soovid ülesannet kustutada?')){
+            kustutaElement.parentElement.parentElement.remove();
         }
+    }
+    // kustutab kõik ülesanded listist ja local storagest korraga, app.js ja KL.js
     kustutaKoikYlesanded(){
         while(taskList.firstChild){
             document.querySelector('.collection').removeChild(taskList.firstChild);
             localStorage.clear();
         }
     }
-
+    // näitab ülesannet listis ja local storages, app.js, KL.js, LS.js
     naitaYlesannet(){
         
 
